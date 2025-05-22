@@ -14,11 +14,15 @@ In an era of rising fuel costs and increasing environmental concerns, understand
 In an era of rising fuel costs and increasing environmental concerns, understanding fuel efficiency has become more crucial than ever. This project explores how various vehicle attributes—such as weight, acceleration, horsepower, and engine cylinder configuration—affect the miles a car can travel per gallon of fuel. By leveraging data-driven insights, this study sheds light on key automotive trends, enabling manufacturers, policymakers, and consumers to make more informed decisions about fuel efficiency, cost optimization, and sustainability.
 
 The analysis of the dataset reveals several key insights into the factors influencing automotive fuel efficiency. The following points summarize the main findings:
-[<img src="visuals/cylinders.png" alt="Engine Cylinder Configuration" height="500px">](https://github.com/pravin-nawghare/Automotive-Fuel-Economy-Predictior/blob/main/visuals/cylinders.png)
+
+[<img src="visuals/cylinders.png" alt="Engine Cylinder Configuration" height="1000px">](https://github.com/pravin-nawghare/Automotive-Fuel-Economy-Predictior/blob/main/visuals/cylinders.png)
+
 - 4-cylinder vehicles dominate the market, accounting for 51.3% of total market share. Their widespread popularity is largely due to their superior fuel efficiency, offering an average of 30 miles per gallon (MPG).
 - Vehicles equipped with 6-cylinder and 8-cylinder engines focus primarily on performance, providing higher acceleration, power, and speed.
-- Lastly, 3-cylinder vehicles exhibit fuel efficiency comparable to 6-cylinder models, yet they remain rare in the market. 
-[<img src="visuals/Model year and mileage.png" alt="Model Year and Mileage" height="500px">](https://github.com/pravin-nawghare/Automotive-Fuel-Economy-Predictior/blob/main/visuals/Model%20year%20and%20mileage.png)
+- Lastly, 3-cylinder vehicles exhibit fuel efficiency comparable to 6-cylinder models, yet they remain rare in the market.
+
+[<img src="visuals/Model year and mileage.png" alt="Model Year and Mileage" height="1000px">](https://github.com/pravin-nawghare/Automotive-Fuel-Economy-Predictior/blob/main/visuals/Model%20year%20and%20mileage.png)
+
 - The data shows that in the early 1970s to mid-1970s, cars achieved an average of 25 to 30 miles per gallon (MPG). However, from the late 1970s onward, mileage improved steadily, reaching 40 MPG by the early 1980s—a remarkable increase compared to the previous decade.
 - Vehicles from origin 1 consistently showed lower fuel efficiency than those from origin 2 and 3, suggesting differences in manufacturing strategies and technological advancements across regions. 
 
@@ -29,7 +33,7 @@ The analysis of the dataset reveals several key insights into the factors influe
 The data highlights the influence of engine cylinder configurations on both performance and market demand. Four-cylinder vehicles dominate, holding 51.3% of market share, largely due to their optimal balance between power and fuel efficiency, covering approximately 30 miles per gallon. Meanwhile, six-cylinder models strike a middle ground between performance and mileage, securing 47% of the market share. At the other end of the spectrum, eight-cylinder vehicles—despite their high power and acceleration—rank as the least fuel-efficient, averaging only 15 MPG, making them more appealing for performance-driven consumers rather than those focused on economy.
 
 ### Weight Reduction and Its Impact on Mileage
-[<img src="visuals/weight vs mileage.png" alt="Weight effects on car's mileage" height="500px">](https://github.com/pravin-nawghare/Automotive-Fuel-Economy-Predictior/blob/main/visuals/weight%20vs%20mileage.png)
+[<img src="visuals/weight vs mileage.png" alt="Weight effects on car's mileage" height="1000px">](https://github.com/pravin-nawghare/Automotive-Fuel-Economy-Predictior/blob/main/visuals/weight%20vs%20mileage.png)
 
 Another remarkable trend observed in this study is the 30% reduction in average vehicle weight over the last decade—from 3,400 kg to 2,400 kg—contributing significantly to improved fuel efficiency. As cars become lighter and more aerodynamically refined, fuel consumption decreases, allowing vehicles to cover greater distances with minimal energy expenditure. This shift in design strategy highlights the industry's commitment to enhancing affordability and sustainability.
 
