@@ -15,15 +15,15 @@ def load_preprocessor():
         data = pickle.load(file)
     return data
     
-# model = load_model()
-# preprocessor = load_preprocessor()
+model = load_model()
+preprocessor = load_preprocessor()
 
 def prediction():
     # Feed the input
 
     # mpg
-    mpg = st.slider('Miles Per Galloon', 5.0,50.0,2.0)
-    st.write(f"Your selected mpg value is: {mpg}")
+    # origin = st.slider('Miles Per Galloon', 1,3,2)
+    # st.write(f"Your selected mpg value is: {origin}")
 
     #acceleration
     acceleration = st.slider('Acceleration of car', 6.0,30.0,2.0)
@@ -68,17 +68,28 @@ def prediction():
     year = st.number_input("Select your car's model year", max_value=82,min_value=70,step=1)
     st.write(f"Your selected car model year is: {year}")
 
-    # input
-    # input = preprocessor.transform()
-
-    predict = st.button("Predict")
+    predict = st.button("Estimate",type='secondary')
     if predict:
-        # predictions = model.predict(input)
-        # print(f"Prediction: {predictions}")
-        pass
+        input_data = {
+        'car name': [name],
+        'car brand': [brand],
+        'weight groups': [weight],
+        'displacement': [displacement],
+        'horsepower': [horsepower],
+        'cylinders': [cylinders],
+        'acceleration': [acceleration],
+        'model year': [year],
+        'origin':[model_year],
+        }
+
+        input_df = pd.DataFrame(input_data)
+        transformed_input = preprocessor.transform(input_df)
+        predictions = model.predict(transformed_input)
+        st.success(f"Your estimated car's mileage is: {round(predictions[0],2)} miles")
+        
        
 def show_predict_page():
     st.title("Automotive fuel consumption prediction!")
     st.header("We need some infomartion", divider='violet')
-    # prediction()
+    prediction()
 
