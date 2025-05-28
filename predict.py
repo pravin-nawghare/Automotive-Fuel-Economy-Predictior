@@ -22,8 +22,8 @@ def prediction():
     # Feed the input
 
     # mpg
-    # origin = st.slider('Miles Per Galloon', 1,3,2)
-    # st.write(f"Your selected mpg value is: {origin}")
+    origin = st.slider('Origin', 1,3,1)
+    st.write(f"Your selected origin value is: {origin}")
 
     #acceleration
     acceleration = st.slider('Acceleration of car', 6.0,30.0,2.0)
@@ -34,8 +34,8 @@ def prediction():
     st.write(f"Your selected horsepower value is: {horsepower}")
 
     # model year
-    model_year = st.number_input('Model Year', min_value=1, max_value=3, step=1)
-    st.write(f"Your selected model year value is: {model_year}")
+    # model_year = st.number_input('Model Year', min_value=1, max_value=3, step=1)
+    # st.write(f"Your selected model year value is: {model_year}")
 
     # displacement 
     displacement = st.slider("Displacement of car", 60.0,460.0,2.0)
@@ -49,10 +49,10 @@ def prediction():
     st.write(f"Your selected car brand is: {brand}")
 
     # car name
-    name = st.selectbox("Select your car", 
-                    ['ford pinto','other','ford maverick','amc matador','toyota corolla','amc hornet',
-                        'chevrolet impala','toyota corona','amc gremlin','peugeot 504','chevrolet chevette'])
-    st.write(f"Your selected car is: {name}")
+    # name = st.selectbox("Select your car", 
+    #                 ['ford pinto','other','ford maverick','amc matador','toyota corolla','amc hornet',
+    #                     'chevrolet impala','toyota corona','amc gremlin','peugeot 504','chevrolet chevette'])
+    # st.write(f"Your selected car is: {name}")
 
     # weight
     weight = st.selectbox("Select your car weight group", 
@@ -65,13 +65,13 @@ def prediction():
     st.write(f"Your selected number of cylinder engine is: {cylinders}")
 
     # model year
-    year = st.number_input("Select your car's model year", max_value=82,min_value=70,step=1)
+    year = st.selectbox("Select your car's model year", [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82])
     st.write(f"Your selected car model year is: {year}")
 
     predict = st.button("Estimate",type='secondary')
     if predict:
         input_data = {
-        'car name': [name],
+        # 'car name': [name],
         'car brand': [brand],
         'weight groups': [weight],
         'displacement': [displacement],
@@ -79,7 +79,7 @@ def prediction():
         'cylinders': [cylinders],
         'acceleration': [acceleration],
         'model year': [year],
-        'origin':[model_year],
+        'origin':[origin],
         }
 
         input_df = pd.DataFrame(input_data)
@@ -90,6 +90,6 @@ def prediction():
        
 def show_predict_page():
     st.title("Automotive fuel consumption prediction!")
-    st.header("We need some infomartion", divider='violet')
+    st.header("We need some infomartion here!", divider='violet')
     prediction()
 
