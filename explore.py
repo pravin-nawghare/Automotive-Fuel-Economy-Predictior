@@ -58,8 +58,24 @@ def load_data():
 df = load_data()
 
 def show_explore_page():
-    st.header("Explore Car Brands", divider='grey')
-    st.text("")
+    # st.header("Explore various car brands in the market", divider='grey')
+    st.write("""
+    Understanding and predicting fuel efficiency is a challenge that combines science, engineering, and a
+    touch of curiosity. Imagine a world where every drop of fuel is maximized, where cars glide effortlessly
+    with minimal environmental impact. This project embarks on a journey to unravel the secrets behind fuel 
+    efficiency, exploring how key vehicle attributes like weight, acceleration, and cylinder count shape the 
+    story of every mile traveled.
+
+    The dataset at the heart of this analysis is a treasure trove of insights, capturing the essence of what 
+    makes a car efficient. Weight, for instance, acts as a silent antagonist; the heavier the car, the more 
+    fuel it demands. Cylinders, too, play their part in this narrative, with higher-cylinder engines often 
+    guzzling more fuel. Acceleration and horsepower add layers of complexity, influencing how energy is 
+    consumed in various driving scenarios. Through the lens of EDA, we delve into these elements, uncovering 
+    patterns and correlations that bring the data to life.
+
+    This report is a collection of findings through thourgh exploratory data analysis. Each trend, each 
+    relationship among vehicle attributes and fuel efficiency, paints a picture of innovation and possibility. 
+    """)
 
     # st.subheader("Weight of cars vs MPG",divider='rainbow')
     # fig6, ax6 = plt.subplots()
@@ -70,13 +86,12 @@ def show_explore_page():
     # ax6.set_title('Weight vs MPG')
     # st.pyplot(fig6)
 
-    st.write("About the data....")
     st.subheader("Which engine is dominating the roads? Are less number of cylinders more preferrable.", divider='rainbow')
     col1, col2 = st.columns(2)
     # Bar plot: Average MPG by Number of Cylinders
     with col1:
         st.write("""
-        **Fuel consumed by cars with different number of cylinders they have**
+        **Engine Cylinder Configuration and Market Trends in Fuel Efficiency**
                  """)
         mpg_by_cyl = df.groupby('cylinders')['mpg'].mean().reset_index()
         # Ensure consistent order
@@ -111,28 +126,45 @@ def show_explore_page():
         ax.set_title("Percent of cars in market with different cylinder configuration")
         st.pyplot(fig1)
     st.write("""
-    Cars with 4 cylinders engine are most preferred choice as it captures 51.3% of market share,and also a great option for wider range of 
-    customers who are looking for fuel efficient cars as these cars are most fuel efficient compared to other engine cylinder configuration
-    by covering distance around 30 miles in one galloon of gasoline. Cars with 5 cylinder engine also a fuel efficient variant but they 
-    even >1% in the market. Cylinders with higher number like 6 and 8 are great performance cars with high acceleration, power and speed.
-    But to give all these great things they have consume to more fuel, infact 8 cylinder engine is least fuel efficent car in the car 
-    market with only 15 miles per galloon mileage but 6 cylinder engine car comes with good overall package as they have decent mileage
-    and rest of the feaures from 8 cyliner engine car. But the most important thing is these cars covers whooping 47% market share.
-    3 cylinder engine is also same as 6 cylinder engine in terms of mileage but they are also very rare in the market.  
+    The analysis of engine configurations reveals that 4-cylinder vehicles dominate the market, accounting for 51.3% of total market share.
+    Their widespread popularity is largely due to their superior fuel efficiency, offering an average of 30 miles per gallon (MPG). 
+    These vehicles cater to a broad range of consumers seeking cost-effective and fuel-conscious options, making them the preferred choice 
+    for everyday commuting and general use.
+
+    On the other hand, 5-cylinder engines, while also fuel-efficient, hold a minimal presence in the market, with representation below 1%.
+    Vehicles equipped with 6-cylinder and 8-cylinder engines focus primarily on performance, providing higher acceleration, power, and 
+    speed. However, this enhanced capability comes at the cost of fuel efficiency. Specifically, 8-cylinder vehicles rank lowest in fuel 
+    economy, averaging only 15 MPG, making them the least fuel-efficient category in the market. Meanwhile, 6-cylinder cars strike a 
+    balance, offering decent mileage while retaining several performance advantages of 8-cylinder models. Notably, they command 47% of 
+    the market share, indicating strong consumer preference for a blend of efficiency and performance.
+
+    Lastly, 3-cylinder vehicles exhibit fuel efficiency comparable to 6-cylinder models, yet they remain rare in the market. Their 
+    limited adoption suggests niche demand rather than widespread consumer preference.  
     """)
+
+
     cylinder_df = df.groupby('cylinders')[['horsepower','acceleration','weight','displacement']].agg('mean')
-    st.text("Relation between increase in number of cylinders with respective to cars performance")
+    st.text("Impact of Engine Cylinder Variation on Key Performance Metrics")
     st.dataframe(cylinder_df)
-    st.write('''Above table shows how other parameters of varies with variation in number of engine cylinders.
-    Cars with 3 cylinder engine were producing 99.25Bhp of horespower with 13.25 acceleration, with 4 cylinder engine
-    horsepower has decreased to 78.65Bhp but acceleration has risen to 16.60. With increase in cylinders upto 5 acceleration of car was rising
-    but but 6 and 8 it has decresed significantly. Similarily, horsepower has been rising only.
-    When it comes to weight of the cars as cylinders increases material inside car increases eventually, 
-    weight also increases. From 2398.5 kg with 3 cylinder engine it has increase to 4114.71 kg
-    for 8 cylinder engine, which is an increase of 172% in weight of cars. 
+    st.markdown('''
+    Above table shows how vehicle performance parameters highlights the significant influence of engine cylinder 
+    count on horsepower, acceleration, and weight.
+    
+    - Horsepower Trends: Cars with 3-cylinder engines generate an average of 99.25 Bhp, while 4-cylinder vehicles show a decrease in 
+    horsepower, producing 78.65 Bhp. However, with increasing cylinder count, horsepower consistently rises, indicating a 
+    direct correlation between engine size and power output.
+    
+    - Acceleration Variations: The relationship between acceleration and cylinder count is more complex. Acceleration improves up 
+    to 5-cylinder engines, reaching peak performance. However, for 6- and 8-cylinder vehicles, acceleration declines noticeably, 
+    possibly due to increased vehicle weight and performance optimization toward power rather than speed responsiveness.
+    
+    - Impact on Vehicle Weight: As cylinder count increases, so does the weight of the vehicle due to the addition of materials 
+    and components. Cars with 3-cylinder engines weigh approximately 2,398.5 kg, whereas 8-cylinder vehicles reach 4,114.71 kg, 
+    representing a staggering 172% increase in weight. This weight gain plays a crucial role in fuel efficiency and overall 
+    driving dynamics.
     ''')
 
-    st.subheader('Origin ',divider='rainbow')
+    st.subheader('Advancements in Car Technology and Fuel Efficiency Trends',divider='rainbow')
     data = df.groupby(['origin'])['mpg'].agg('mean').sort_values(ascending=True)
     fig10,ax10 = plt.subplots()
     data.plot(kind='bar', ax=ax10, color='orange')
@@ -141,9 +173,16 @@ def show_explore_page():
     #ax10.set_title('Most commonly bought cars')
     st.pyplot(fig10)
     st.write('''
-    The amount of distance covered by cars is increasing as the origin of cars has been increased. It is a great thing to see with 
-    with more and more research and advancement in car technology it is clearly visible how automakers are now manufacturing fuel 
-    efficient cars which is not only beneficial for customer but for environment also by curbing the pollution.   
+    The continuous evolution of automobile technology has led to a remarkable increase in fuel efficiency across newer vehicle variants. 
+    With each successive model release, manufacturers integrate improvements in engine design, aerodynamics, and fuel optimization, 
+    contributing to enhanced mileage per gallon. This trend reflects the growing focus on delivering vehicles that not only meet 
+    consumer demands for cost-effective fuel consumption but also align with sustainability goals.
+
+    These advancements bring dual benefits—customers experience lower fuel expenses, and the environment sees reduced emissions,
+    helping curb pollution. The automotive industry's commitment to innovation plays a crucial role in shaping a future where vehicles 
+    are more energy-efficient, supporting efforts to minimize carbon footprints globally. As automakers continue refining their designs, 
+    newer model variants are expected to further optimize fuel utilization, reinforcing the shift toward eco-friendly transportation 
+    solutions.
     ''')
 
 
@@ -160,14 +199,19 @@ def show_explore_page():
     ax3.set_title('Most commonly bought cars')
     st.pyplot(fig3)
     st.write('''
-    Ford Pinto is most desirable car for the consumers as it most commonly bought car, followed by Toyota Corolla, AMC Matador and
-    Ford Maverick. All these sits on top 4 positions in the top 10 most bought car list. Below them comes Chevrolet Chevette and 
-    Impalla, AMC Gremlin and Hornet, Toyota Corona and Puegot 504. From this list it has been observed that though individual cars 
-    of AMC do not occupy first position but coming together they are most bought car brand in the market with 3 cars in top 10. 
+    The analysis of consumer purchasing trends highlights Ford Pinto as the most sought-after car, leading the market in overall sales. 
+    It is followed closely by Toyota Corolla, AMC Matador, and Ford Maverick, which collectively secure the top four positions in the 
+    list of the ten most purchased vehicles. These models continue to be preferred by consumers due to their reliability, affordability, 
+    and performance.
+
+    Further down the rankings, Chevrolet Chevette and Impala maintain strong market presence, alongside AMC Gremlin and Hornet, 
+    Toyota Corona, and Peugeot 504. While individual AMC models do not claim the top spot, their collective presence in the market 
+    is significant. With three of its cars ranking within the top ten, AMC emerges as the most purchased car brand, showcasing its 
+    widespread appeal among consumers.
     ''')
 
     # Explore car brand names
-    st.subheader("Which car brand is dominating the car market?",divider='rainbow')
+    st.subheader("Market Share Analysis of Car Brands",divider='rainbow')
     fig5, ax5 = plt.subplots()
     c= sns.color_palette(palette="cool", n_colors=31)
     brand_name = df['car brand'].str.title().value_counts()
@@ -180,10 +224,18 @@ def show_explore_page():
     ax5.set_title('Popular Car Brands')
     st.pyplot(fig5)
     st.write('''
-    Ford and Chervolet has undoubtely has captured most of the market, by selling most number of cars in the given years. Plymouth,
-    AMC, Dodge, Toyota, Datsun and Volkswagen are not that far in the list but by far in terms of count of cars sold. Buick, Pontiac, 
-    Honda, Mazda and Mercury are also doing well. Rest of the brands like Renault, Chrysler, Volvo, Audi and Fiat are barely making 
-    their cars into hands of customers. They are the least sold car brands in the market.
+    Ford and Chevrolet have firmly established themselves as the dominant players in the automotive market, consistently leading in 
+    vehicle sales over the observed period. Their strong brand presence and widespread consumer appeal have positioned them at the 
+    forefront of the industry, capturing a significant portion of market share.
+
+    While Plymouth, AMC, Dodge, Toyota, Datsun, and Volkswagen trail behind the leaders, they maintain respectable sales figures, 
+    demonstrating competitive performance in the market. Additionally, Buick, Pontiac, Honda, Mazda, and Mercury continue to perform 
+    well, reinforcing their relevance among consumers seeking reliable and well-engineered vehicles.
+
+    On the other end of the spectrum, Renault, Chrysler, Volvo, Audi, and Fiat have struggled to gain substantial traction, with 
+    significantly lower sales volumes. These brands face challenges in market penetration, resulting in comparatively lower adoption 
+    rates among consumers. The overall market dynamics underscore the stronghold of established manufacturers while highlighting areas 
+    of opportunity for emerging competitors.
     ''')
 
     # Cars performance wrt to model year
@@ -205,9 +257,9 @@ def show_explore_page():
         ax1.set_title('Car weight vs model year')
         st.pyplot(fig1)
         st.write('''
-        One thing that is popping out from the above graph is that with coming years car
-        manufactures are now shifting towards manufacturing lighter cars. This not only decreases their fuel consumption 
-        but reduces the burden the fuel expenses on customers.     
+        One thing that is popping out from the above graph is that with coming years car manufactures are now shifting towards 
+        manufacturing lighter cars except for some car brands which are pushing for more high performance cars like ford. This not 
+        only decreases their fuel consumption but reduces the burden the fuel expenses on customers.     
         ''')
 
     with col2:
@@ -243,7 +295,7 @@ def show_explore_page():
     # ''')
 
     # origin vs mpg vs model year
-    st.subheader("How does the origin of car and make year affects fuel consumption of cars?",divider='rainbow')
+    st.subheader("Impact of Model Year and Car Origin on Fuel Efficiency",divider='rainbow')
     fig8,ax8 = plt.subplots()
     sns.lineplot(data=df, x='model year', y='mpg', marker='o', hue='origin',palette='cool', errorbar=None)
     ax8.set_xlabel("Model Year")
@@ -251,17 +303,24 @@ def show_explore_page():
     ax8.set_title("Car mileage has incerased with growing years and origin")
     st.pyplot(fig8)
     st.write('''
-    Model year has seen high correlation with mileage of cars, similarly origin too. As the model year kept on 
-    rising the car are becoming more and more fuel efficient. Cars with origin 1 were always way less fuel 
-    efficient compared to cars with origin 2 and 3. In early 70 to mid 70's the distance covered by cars in 
-    one galloon of gasoline was 25 to 30 miles. But from late 70's it has started rising and in the early 80's 
-    it reached the mark the of 40 miles in one galloon of gasoline, which a decade ago varing between 25 - 30.
-    In other terms it can be interpretated as, if one galloon of gasoline costs $10 in 70's then with same 
-    amount of fuel now 10 miles are extra covered by the cars in 80's         
+    The analysis reveals a strong correlation between model year and fuel efficiency, demonstrating significant advancements in 
+    automotive engineering over time. As newer car models were introduced, manufacturers optimized fuel consumption, leading to 
+    more efficient vehicles. The data shows that in the early 1970s to mid-1970s, cars achieved an average of 25 to 30 miles per 
+    gallon (MPG). However, from the late 1970s onward, mileage improved steadily, reaching 40 MPG by the early 1980s—a remarkable 
+    increase compared to the previous decade.       
+    
+    Additionally, car origin played a critical role in fuel efficiency trends. Vehicles from origin 1 consistently showed lower fuel 
+    efficiency than those from origin 2 and 3, suggesting differences in manufacturing strategies and technological advancements across 
+    regions. This trend highlights how design and engineering standards across different markets influenced mileage performance.
+             
+    From a cost perspective, this efficiency improvement is substantial. If one gallon of gasoline cost $10 in the 1970s, then by the 
+    1980s, the same amount of fuel allowed cars to travel an additional 10 miles, effectively reducing fuel expenses for consumers 
+    while contributing to sustainability efforts. These insights underscore the evolution of fuel-efficient automobiles, driven by 
+    continuous research, innovation, and consumer demand for cost-effective transportation.
     ''')
 
     # car weight vs model year
-    st.subheader("The weight of the car has been significantly descreased in coming years with advancement in technology",divider='rainbow')
+    st.subheader("The weight of the car has been significantly descreased in coming years with automotive innovation",divider='rainbow')
     fig9,ax9 = plt.subplots()
     sns.lineplot(data=df, x='model year', y='weight',marker='o',color='violet')
     sns.regplot(data=df, x='model year', y='weight', scatter=False, label ='Trend', color='red',line_kws={'linestyle':'--','linewidth':0.5},ci=None)
@@ -270,13 +329,21 @@ def show_explore_page():
     #ax9.set_title("Decrease in car weight with growing years")
     st.pyplot(fig9)
     st.write('''
-    As research and development teams of all car brands are working to make more affordable, the cars are 
-    also becoming light in weight thus increasing the mileage of the cars. In a decade on research the car
-    weight has been decreased from 3400kg to 2400kg which is decrease of about 30% in car weight.
+    Advancements in automotive research and development have led to significant reductions in vehicle weight, contributing to improved 
+    fuel efficiency. As manufacturers focus on making cars more affordable, lightweight materials and optimized engineering designs 
+    have played a crucial role in enhancing mileage.
+
+    Over the past decade, the average weight of cars has decreased from 3,400 kg to 2,400 kg, representing a 30% reduction. This 
+    decline in weight directly impacts fuel consumption, as lighter vehicles require less energy to operate, leading to increased 
+    miles per gallon. These innovations not only provide cost savings for consumers but also support sustainability efforts by reducing 
+    fuel dependency and lowering emissions.
+
+    With ongoing advancements in material science and vehicle aerodynamics, the trend toward lighter, more efficient cars is expected 
+    to continue, shaping the future of the automotive industry.
     ''')
 
     # Car performance with coming years
-    st.subheader("Growing years has seen decrease in performance of cars",divider='rainbow')
+    st.subheader("Growing years has seen decrease in high performance cars",divider='rainbow')
     make_year = df.groupby('model year')[['horsepower','acceleration','displacement','cylinders']].agg('mean')
     col1, col2 = st.columns(2)
     with col1:
@@ -296,7 +363,7 @@ def show_explore_page():
         st.pyplot(fig2)
 
     # with weight of car as in groups
-    st.subheader("Car weights",divider='rainbow')
+    st.subheader("Cars in different weights category",divider='rainbow')
     fig11,ax11 = plt.subplots()
     c = sns.color_palette(palette='cool',n_colors=10)
     data = df['weight groups'].value_counts().sort_values(ascending=True)
@@ -304,12 +371,31 @@ def show_explore_page():
     data.plot(kind='barh', color=c, ax=ax11)
     ax11.set_xlabel("Number of cars")
     ax11.set_ylabel("Weight of car")
-    ax11.set_title("How heavy cars are their in the market")
+    ax11.set_title("How does the weight of car affects the customer's buying preference?")
     st.pyplot(fig11)
-    st.write("")
+    st.write("""
+    The distributions shows concentration in the mid-weight range. The largest group falls in the category of 
+    2000 - 2500 kg, followed by 2500 - 3000 with just less than 100 cars falling in this category. There is a noticable
+    tapering off at both extremes: fewer vehicles exist in the lightest and heaviest segments. This pattern suggests
+    that most cars are designed within 2500 - 3000 kg range, likely balancing performance.
+    
+    Weight affects buyer's preference as heavier cars are generally perceived as safer in collisions, whereas light-weight
+    cars are environment friendly and most appealing for buyers and it's clearly visible too.
+    Weight also plays a crucial role in influencing car's fuel efficiency. As lighter cars tends to consume less
+    fuel and they are also the most preferred choice of constumers. Heavier cars are great to gain driving experience
+    but heavy on pocket as they drinks lot of fuel in their run.
+    
+    Performance of car is also not too far from getting affected by its weight. As weight rises, the time taken to
+    accelerate and decelerate the car also rises. So, to gain speed it will take more time than lighter cars and during
+    braking too. Emissions are also higher for heavier cars as they consume more fuel to drive same length when 
+    compared to a light weight car.        
+    """)
 
     # Explore target variable
-    st.subheader("Explore target variable",divider='rainbow')
+    st.subheader("Explore the target variable",divider='rainbow')
+    st.markdown('''
+            ##### Distribution of Miles Per Gallon (MPG) in the Market
+                ''')
     fig2, ax2 = plt.subplots()
     sns.histplot(data=df, x='mpg', hue='origin', bins=20, kde=True, palette='autumn', ax=ax2)
     ax2.set_xlabel('Miles Per Galloon')
@@ -317,10 +403,17 @@ def show_explore_page():
     ax2.set_title('Distribution of MPG')
     st.pyplot(fig2)
     st.write('''
-    The histogram plot of miles per galloon (mpg) is right skewed. Most of the cars have mileage less 30 miles.
-    With mpg around 15 their are most number of cars in the market. Very few of them are greater than 35 but as 
-    mpg goes above 40 the number of cars with range of distance covered in one galloon of fuel are hardly 
-    countable on finger tips.        
+    The histogram analysis of miles per gallon (MPG) reveals a right-skewed distribution, indicating that the majority of vehicles
+    have mileage below 30 MPG. The highest concentration of cars is observed around 15 MPG, making them the most common in the market. 
+    This suggests that fuel efficiency remains a challenge for a significant portion of vehicles, particularly those with larger 
+    engines or older designs.
+
+    Conversely, cars with MPG greater than 35 are relatively rare, and as efficiency surpasses 40 MPG, the number of available models 
+    declines drastically. These ultra-efficient vehicles are limited in the market, reflecting the technological constraints or consumer 
+    preferences that may favor performance over fuel economy.
+
+    Understanding this distribution can help manufacturers and policymakers evaluate trends in fuel efficiency, identifying opportunities
+    to promote higher-mileage models and encourage sustainable transportation solutions.        
     ''')
 
     # Target variable vs rest numeric variable
