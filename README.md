@@ -14,6 +14,11 @@ The primary objectives of this analysis are:
 
 1. To identify the major factors that affect the car's fuel efficiency.
 2. To provide actionable insights to car manufactures for maximizing the fuel efficiency.
+3. To develop a supervised model to predict vehicles mileage.
+
+## About the dataset
+- The auto_mpg.csv file contains information on features of different type of vehicles.
+- Each records represents one car variant, and it's features like car brand, horsepower, displacement, number of cylinders, acceleration, model year, etc.
 
 ## Summary
 
@@ -54,6 +59,28 @@ The plot shows what are the factors other than your driving skills affect the fu
 The bars in green namely acceleration, origin, model year are the features with positive correlation. Origin and model year have moderate positive correlation with mpg which means if these features increases fuel efficiency some what increases. On the other hand acceleration though have positive correlation but it is weak, so it's effect on mpg will be the lowest compared to other two.
 
 Finally, we can draw a conclusion that a fuel efficient car will be built later in years and with newer variants in the market. Whereas, if features like weight, displacement, cylinders and horsepower have higher values then they will significantly lower the mileage of car.
+
+## Engineered Features
+From the data *weight group* feature is created from weight feature which segregates the car according to their weight groups.
+
+**As a result of featured engineered, it has improved the Root Mean Squared Error from 2.49 to 2.41 and r2 score from 0.8821 to 0.89. Thus, significantly improving the models performance**
+2.41 rmse and 0.889344 r2
+2.4902 0.8821
+
+## Model Selection
+Random Forest, Ada Boost Regressor, Gradient Boosting Regressor, Linear Regression and Decision Tree Regressor were trained on the data and the results were compared based R2 score and RMSE metrics. From these models Random Forest, Ada Boost Regressor, Gradient Boosting Regressor were chosen to fine tune to improve the performance.
+After hyper parameter tuning *Gradient Boosting Regressor* has better performance than other two.
+|Model Name|RMSE|R2 Score|
+|:-------:|:-----:|:------------|
+|Ada Boost Regressor|3.088|0.818|
+|Random Forest Regressor|2.968|0.832|
+|Gradient Boosting Regressor|2.412|0.889|
+
+## Model Explainability
+|Metrics|Value|Explaination|
+|:-------:|:-----:|:------------|
+|R2 Score|0.89|It shows that our model can capture 89% of variation in the data.|
+|RMSE|2.41|It indicates that the models prediction can less or more than actual value.|
 
 ## Conclusion
 
