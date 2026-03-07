@@ -64,8 +64,7 @@ Finally, we can draw a conclusion that a fuel efficient car will be built later 
 From the data *weight group* feature is created from weight feature which segregates the car according to their weight groups.
 
 **As a result of featured engineered, it has improved the Root Mean Squared Error from 2.49 to 2.41 and r2 score from 0.8821 to 0.89. Thus, significantly improving the models performance**
-2.41 rmse and 0.889344 r2
-2.4902 0.8821
+
 
 ## Model Selection
 Random Forest, Ada Boost Regressor, Gradient Boosting Regressor, Linear Regression and Decision Tree Regressor were trained on the data and the results were compared based R2 score and RMSE metrics. From these models Random Forest, Ada Boost Regressor, Gradient Boosting Regressor were chosen to fine tune to improve the performance.
@@ -79,7 +78,7 @@ After hyper parameter tuning *Gradient Boosting Regressor* has better performanc
 ## Model Explainability
 |Metrics|Value|Explaination|
 |:-------:|:-----:|:------------|
-|R2 Score|0.89|It shows that our model can capture 89% of variation in the data.|
+|R2 Score|0.89|It shows that our model can capture 89% of variation mileage with the provided input data.|
 |RMSE|2.41|It indicates that the models prediction can less or more than actual value.|
 
 ## Conclusion
@@ -103,7 +102,7 @@ pip install -r requirements.txt
 Run the command
 
 ```
-streamlit run app.py
+python run_project.py
 ```
 This will start the streamlit app and you can view the dashboard in your browser.
 

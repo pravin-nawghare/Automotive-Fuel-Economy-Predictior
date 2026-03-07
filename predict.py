@@ -2,21 +2,10 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
+import requests
 
-# Load the saved model
-def load_model():
-    with open('saved_model.pkl','rb') as file:
-        data = pickle.load(file)
-    return data
-
-# Load the saved model
-def load_preprocessor():
-    with open('preprocessor.pkl','rb') as file:
-        data = pickle.load(file)
-    return data
-    
-model = load_model()
-preprocessor = load_preprocessor()
+API_URL = "http://localhost:8000/predict"
+API_URL_BATCH = "http://localhost:8000/predict-batch"
 
 def prediction():
     # Feed the input
@@ -72,20 +61,29 @@ def prediction():
     if predict:
         input_data = {
         # 'car name': [name],
-        'car brand': [brand],
-        'weight groups': [weight],
-        'displacement': [displacement],
-        'horsepower': [horsepower],
-        'cylinders': [cylinders],
-        'acceleration': [acceleration],
-        'model year': [year],
-        'origin':[origin],
+        'brand': brand,
+        'weight': weight,
+        'displacement': float(displacement),
+        'horsepower': float(horsepower),
+        'cylinders': int(cylinders),
+        'acceleration': float(acceleration),
+        'year': int(year),
+        'origin':int(origin),
         }
+        
+        response = requests.post(API_URL, json=input_data)
 
-        input_df = pd.DataFrame(input_data)
-        transformed_input = preprocessor.transform(input_df)
-        predictions = model.predict(transformed_input)
-        st.success(f"Your estimated car's mileage is: {round(predictions[0],2)} miles")
+        if response.status_code == 200:
+
+            prediction = response.json()["prediction"]
+
+            st.success(f"{prediction}")
+
+        else:
+            print(response.status_code)
+            print(response.text)
+            st.error("Prediction failed")
+        
         
        
 def show_predict_page():
